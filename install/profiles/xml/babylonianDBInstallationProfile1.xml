@@ -129,19 +129,35 @@
 				</label>
 			</labels>
 			<items>
-				<item idno="historicPlace" enabled="1" default="1">
+				<item idno="country" enabled="1" default="1">
 					<labels>
 						<label locale="en_US" preferred="1">
-								<name_singular>Historic place</name_singular>
-								<name_plural>Historic places</name_plural>
+								<name_singular>Country</name_singular>
+								<name_plural>Countries</name_plural>
 						</label>
 					</labels>
 				</item>
-				<item idno="actualPlace" enabled="1" default="0">
+				<item idno="city" enabled="1" default="1">
 					<labels>
 						<label locale="en_US" preferred="1">
-								<name_singular>Actual place</name_singular>
-								<name_plural>Actual places</name_plural>
+								<name_singular>City</name_singular>
+								<name_plural>Cities</name_plural>
+						</label>
+					</labels>
+				</item>
+				<item idno="region" enabled="1" default="0">
+					<labels>
+						<label locale="en_US" preferred="1">
+								<name_singular>Region</name_singular>
+								<name_plural>Regions</name_plural>
+						</label>
+					</labels>
+				</item>
+				<item idno="hierarchyName" enabled="1" default="0">
+					<labels>
+						<label locale="en_US" preferred="1">
+								<name_singular>Hierarchy name</name_singular>
+								<name_plural>Hierarchy names</name_plural>
 						</label>
 					</labels>
 				</item>
@@ -4877,8 +4893,8 @@
 						</label>
 					</labels>
 					<bundlePlacements>
-						<placement code="hierarchy_navigation">
-							<bundle>hierarchy_navigation</bundle>
+						<placement code="hierarchy_location">
+							<bundle>hierarchy_location</bundle>
 						</placement>
 						<placement code="idno">
 							<bundle>idno</bundle>
@@ -4940,8 +4956,8 @@
 						</label>
 					</labels>
 					<bundlePlacements>
-						<placement code="hierarchy_navigation">
-							<bundle>hierarchy_navigation</bundle>
+						<placement code="hierarchy_location">
+							<bundle>hierarchy_location</bundle>
 						</placement>
 						<placement code="idno">
 							<bundle>idno</bundle>
@@ -4952,14 +4968,14 @@
 						<placement code="preferred_labels">
 							<bundle>preferred_labels</bundle>
 								<settings>
-									<setting name="label" locale="en_US">Name</setting>
+									<setting name="label" locale="en_US">Storage location name</setting>
 								</settings>
 						</placement>
 						<placement code="nonpreferred_labels">
 							<bundle>nonpreferred_labels</bundle>
 								<settings>
-									<setting name="label" locale="en_US">Alternative name</setting>
-									<setting name="add_label" locale="en_US">Alternative name</setting>
+									<setting name="label" locale="en_US">Alternative storage location name</setting>
+									<setting name="add_label" locale="en_US">Alternative storage location name</setting>
 								</settings>
 						</placement>
 					</bundlePlacements>
@@ -4974,7 +4990,7 @@
 						<placement code="ca_objects">
 							<bundle>ca_objects</bundle>
 								<settings>
-									<setting name="label" locale="en_US">Related object</setting>
+									<setting name="label" locale="en_US">Related objects</setting>
 									<setting name="add_label" locale="en_US">Add related object</setting>
 									<setting name="restrict_to_relationship_types">historicArchive</setting>
 								</settings>
@@ -4982,7 +4998,7 @@
 						<placement code="ca_places">
 							<bundle>ca_places</bundle>
 								<settings>
-									<setting name="label" locale="en_US">Related place</setting>
+									<setting name="label" locale="en_US">Related places</setting>
 									<setting name="add_label" locale="en_US">Add related place</setting>
 									<setting name="restrict_to_relationship_types">historicPlace</setting>
 								</settings>
@@ -4990,7 +5006,7 @@
 						<placement code="ca_entities">
 							<bundle>ca_entities</bundle>
 								<settings>
-									<setting name="label" locale="en_US">Related entity</setting>
+									<setting name="label" locale="en_US">Related entities</setting>
 									<setting name="add_label" locale="en_US">Add related entity</setting>
 									<setting name="restrict_to_relationship_types">relatedEntity</setting>
 								</settings>
