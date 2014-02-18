@@ -178,14 +178,30 @@
 						</label>
 					</labels>
 				</item>
-				<item idno="currentStorageLocation" enabled="1" default="0">
+				<item idno="hierarchyName" enabled="1" default="0">
+					<labels>
+						<label locale="en_US" preferred="1">
+							<name_singular>Hierarchy name</name_singular>
+							<name_plural>Hierarchy names</name_plural>
+						</label>
+					</labels>
+				</item>
+				<item idno="temple" enabled="1" default="0">
+					<labels>
+						<label locale="en_US" preferred="1">
+							<name_singular>Temple</name_singular>
+							<name_plural>Temples</name_plural>
+						</label>
+					</labels>
+				</item>
+			<!--<item idno="currentStorageLocation" enabled="1" default="0">
 					<labels>
 						<label locale="en_US" preferred="1">
 							<name_singular>Current storage location</name_singular>
 							<name_plural>Current storage locations</name_plural>
 						</label>
 					</labels>
-				</item>
+				</item>-->
 			</items>
 		</list>
 		<list code="personRole_list" hierarchical="0" system="1" vocabulary="0">
@@ -3531,7 +3547,7 @@
 		<metadataElement code="collectionDescription" datatype="Text">
 			<labels>
 				<label locale="en_US">
-					<name>Collection description</name>
+					<name>Description</name>
 					<description>collectionDescription</description>
 				</label>
 			</labels>
@@ -3540,10 +3556,61 @@
 				<setting name="fieldHeight">10</setting>
 				<setting name="minChars">0</setting>
 				<setting name="maxChars">255</setting>
+				<setting name="usewysiwygeditor">0</setting>
 			</settings>
 			<typeRestrictions>
 				<restriction code="r1">
 					<table>ca_collections</table>
+					<settings>
+						<setting name="minAttributesPerRow">0</setting>
+						<setting name="maxAttributesPerRow">10</setting>
+						<setting name="minimumAttributeBundlesToDisplay">0</setting>
+					</settings>
+				</restriction>
+			</typeRestrictions>
+		</metadataElement>
+		<metadataElement code="storageLocationDescription" datatype="Text">
+			<labels>
+				<label locale="en_US">
+					<name>Description</name>
+					<description>storageLocationDescription</description>
+				</label>
+			</labels>
+			<settings>
+				<setting name="fieldWidth">100</setting>
+				<setting name="fieldHeight">10</setting>
+				<setting name="minChars">0</setting>
+				<setting name="maxChars">255</setting>
+				<setting name="usewysiwygeditor">0</setting>
+			</settings>
+			<typeRestrictions>
+				<restriction code="r1">
+					<table>ca_storage_locations</table>
+					<settings>
+						<setting name="minAttributesPerRow">0</setting>
+						<setting name="maxAttributesPerRow">10</setting>
+						<setting name="minimumAttributeBundlesToDisplay">0</setting>
+					</settings>
+				</restriction>
+			</typeRestrictions>
+		</metadataElement>
+		<metadataElement code="placeDescription" datatype="Text">
+			<labels>
+				<label locale="en_US">
+					<name>Description</name>
+					<description>placeDescription</description>
+				</label>
+			</labels>
+			<settings>
+				<setting name="fieldWidth">100</setting>
+				<setting name="fieldHeight">10</setting>
+				<setting name="minChars">0</setting>
+				<setting name="maxChars">255</setting>
+				<setting name="usewysiwygeditor">0</setting>
+			</settings>
+			<typeRestrictions>
+				<restriction code="r1">
+					<table>ca_places</table>
 					<settings>
 						<setting name="minAttributesPerRow">0</setting>
 						<setting name="maxAttributesPerRow">10</setting>
@@ -3616,7 +3683,6 @@
 			<typeRestrictions>
 				<restriction code="r1">
 					<table>ca_occurrences</table>
-					<type>bibliography</type>
 					<settings>
 						<setting name="minAttributesPerRow">0</setting>
 						<setting name="maxAttributesPerRow">200</setting>
@@ -3674,15 +3740,6 @@
 							<bundle>idno</bundle>
 							<settings>
 								<setting name="label" locale="en_US">Nabuco no.</setting>
-							</settings>
-						</placement>
-						<placement code="ca_attribute_cdliNumber">
-							<bundle>ca_attribute_cdliNumber</bundle>
-						</placement>
-						<placement code="ca_attribute_cdliReferenceSet">
-							<bundle>ca_attribute_cdliReferenceSet</bundle>
-							<settings>
-								<setting name="add_label" locale="en_US">Add CDLI reference</setting>
 							</settings>
 						</placement>
 					<!--<placement code="ca_attribute_museumNumber">
@@ -3795,6 +3852,15 @@
 						</placement>
 						<placement code="ca_attribute_placeOfIssueRemark">
 							<bundle>ca_attribute_placeOfIssueRemark</bundle>
+						</placement>
+						<placement code="ca_attribute_cdliNumber">
+							<bundle>ca_attribute_cdliNumber</bundle>
+						</placement>
+						<placement code="ca_attribute_cdliReferenceSet">
+							<bundle>ca_attribute_cdliReferenceSet</bundle>
+							<settings>
+								<setting name="add_label" locale="en_US">Add CDLI reference</setting>
+							</settings>
 						</placement>
 					</bundlePlacements>
 				</screen>
@@ -4437,14 +4503,14 @@
 								<setting name="add_label" locale="en_US">Add Surname spelling</setting>
 							</settings>
 						</placement>-->
-						<placement code="ca_entities">
+						<placement code="ca_entities_father">
 							<bundle>ca_entities</bundle>
 								<settings>
 									<setting name="label" locale="en_US">Father</setting>
 									<setting name="restrict_to_relationship_types">father</setting>
 								</settings>
 						</placement>
-						<placement code="ca_entities">
+						<placement code="ca_entities_family">
 							<bundle>ca_entities</bundle>
 								<settings>
 									<setting name="label" locale="en_US">Family</setting>
@@ -4667,7 +4733,7 @@
 						<placement code="ca_occurrences">
 							<bundle>ca_occurrences</bundle>
 							<settings>
-								<setting name="label" locale="en_US">Related publication</setting>
+								<setting name="label" locale="en_US">Related publications</setting>
 								<setting name="add_label" locale="en_US">Add related publication</setting>
 								<setting name="restrict_to_relationship_types">author</setting>
 								<setting name="restrict_to_relationship_types">editor</setting>
@@ -4915,6 +4981,12 @@
 									<setting name="add_label" locale="en_US">Alternative place name</setting>
 								</settings>
 						</placement>
+						<placement code="ca_attribute_placeDescription">
+							<bundle>ca_attribute_placeDescription</bundle>
+								<settings>
+									<setting name="label" locale="en_US">Add description</setting>
+								</settings>
+						</placement>
 					</bundlePlacements>
 				</screen>
 				<screen idno="relationships" default="0">
@@ -4976,6 +5048,13 @@
 								<settings>
 									<setting name="label" locale="en_US">Alternative storage location name</setting>
 									<setting name="add_label" locale="en_US">Alternative storage location name</setting>
+								</settings>
+						</placement>
+						<placement code="ca_attribute_storage_locations">
+							<bundle>ca_attribute_storage_locations</bundle>
+								<settings>
+									<setting name="label" locale="en_US">Description</setting>
+									<setting name="add_label" locale="en_US">Add Description</setting>
 								</settings>
 						</placement>
 					</bundlePlacements>
@@ -5047,7 +5126,7 @@
 						<placement code="ca_attribute_volumeNo">
 							<bundle>ca_attribute_volumeNo</bundle>
 						</placement>
-						<placement code="ca_entities">
+						<placement code="ca_entities_author">
 							<bundle>ca_entities</bundle>
 								<settings>
 									<setting name="label" locale="en_US">Author</setting>
@@ -5055,7 +5134,7 @@
 									<setting name="restrict_to_relationship_types">author</setting>
 								</settings>
 						</placement>
-						<placement code="ca_entities">
+						<placement code="ca_entities_editor">
 							<bundle>ca_entities</bundle>
 								<settings>
 									<setting name="label" locale="en_US">Editor</setting>
@@ -5075,14 +5154,14 @@
 						<placement code="ca_objects">
 							<bundle>ca_objects</bundle>
 								<settings>
-									<setting name="label" locale="en_US">Related object</setting>
+									<setting name="label" locale="en_US">Related objects</setting>
 									<setting name="add_label" locale="en_US">Add related object</setting>
 								</settings>
 						</placement>
 						<placement code="ca_occurrences">
 							<bundle>ca_occurrences</bundle>
 								<settings>
-									<setting name="label" locale="en_US">Related publication</setting>
+									<setting name="label" locale="en_US">Related publications</setting>
 									<setting name="add_label" locale="en_US">Add Related publication</setting>
 								</settings>
 						</placement>
@@ -5428,8 +5507,8 @@
 				<type code="historicPlace" default="1">
 					<labels>
 						<label locale="en_US">
-							<typename>is historic place of</typename>
-							<typename_reverse>has historic place</typename_reverse>
+							<typename>has historic place</typename>
+							<typename_reverse>is historic place of</typename_reverse>
 						</label>
 					</labels>
 					<subTypeLeft></subTypeLeft>
