@@ -1095,7 +1095,7 @@ class ca_search_forms extends BundlableLabelableBaseModelWithAttributes {
 							'height' => (isset($va_element['settings']['height']) && ($va_element['settings']['height'] > 0)) ? $va_element['settings']['height'] : 1
 						)),
 						'label' => $vs_field_label,
-						'name' => $vs_field
+                        'name' => $va_element['bundle_name']
 					); 
 					continue(2);
 				case 'created':
@@ -1128,7 +1128,7 @@ class ca_search_forms extends BundlableLabelableBaseModelWithAttributes {
 						$va_labels = caExtractValuesByUserLocale(array(0 => $va_element['settings']['label']));
 						$vs_label = array_shift($va_labels);
 					} 
-					if (!$va_label && !($vs_label = $va_access_points[$va_tmp[0]]['name'])) {
+                    if (!$vs_label && !($vs_label = $va_access_points[$va_tmp[0]]['name'])) {
 						$vs_label = $vs_field;
 					}
 				
@@ -1180,7 +1180,7 @@ class ca_search_forms extends BundlableLabelableBaseModelWithAttributes {
 				if (!is_array($va_values)) { $va_values = array($va_values); }
 				foreach($va_values as $vs_value) {
 					if (!strlen(trim($vs_value))) { continue; }
-					if ((strpos($vs_value, ' ') !== false) && ($vs_value{0} != '[')) {
+                    if (preg_match('![^A-Za-z0-9]+!', $vs_value) && !preg_match('![\*]+!', $vs_value) && ($vs_value{0} != '[')) {
 						$vs_query_element = '"'.str_replace('"', '', $vs_value).'"';
 					} else {
 						$vs_query_element = $vs_value;
@@ -1242,7 +1242,7 @@ class ca_search_forms extends BundlableLabelableBaseModelWithAttributes {
 				if (sizeof($va_sub_elements = $t_element->getElementsInSet()) > 1) {
 					foreach($va_sub_elements as $vn_element_id => $va_element_info) {
 						if ($va_tmp[1] == $va_element_info['element_code']) { continue; }
-						$va_elements[] = $va_tmp[0].'.'.$va_element_info['element_code'];
+                        $va_elements[] = $va_tmp[0].'.'.$va_tmp[1].'.'.$va_element_info['element_code'];
 					}
 				}
 			} else {
