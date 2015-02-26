@@ -40,7 +40,7 @@ require_once(__CA_LIB_DIR__.'/core/Parsers/TimeExpressionParser.php');
 require_once(__CA_LIB_DIR__.'/core/Parsers/ExpressionParser.php');
 require_once(__CA_LIB_DIR__."/ca/ApplicationPluginManager.php");
 require_once(__CA_LIB_DIR__.'/core/Parsers/ganon.php');
-	
+
 	# ------------------------------------------------------------------------------------------------
 	/**
 	 * @param $ps_item_locale -
@@ -1901,7 +1901,7 @@ require_once(__CA_LIB_DIR__.'/core/Parsers/ganon.php');
 		$va_proc_templates = array();
 		$vn_i = 0;
 		
-		$o_if = $o_doc("if");						// if 
+		$o_ifs = $o_doc("if");						// if 
 		$o_ifdefs = $o_doc("ifdef");				// if defined
 		$o_ifnotdefs = $o_doc("ifnotdef");			// if not defined
 		$o_mores = $o_doc("more");					// more tags – content suppressed if there are no defined values following the tag pair
@@ -1909,11 +1909,11 @@ require_once(__CA_LIB_DIR__.'/core/Parsers/ganon.php');
 		$o_ifcounts = $o_doc("ifcount");			// if count - conditionally return template if # of items is in-bounds
 		
 		$va_if = array();
-		foreach($o_if as $o_if) {
+		foreach($o_ifs as $o_if) {
 			if (!$o_if) { continue; }
 			
 			$vs_html = $o_if->html();
-			$vs_content = $o_f->getInnerText();
+			$vs_content = $o_if->getInnerText();
 			
 			$va_if[] = array('directive' => $vs_html, 'content' => $vs_content, 'rule' => $vs_rule = (string)$o_if->getAttribute('rule'));
 		}
@@ -2693,7 +2693,7 @@ require_once(__CA_LIB_DIR__.'/core/Parsers/ganon.php');
 		$va_tmp = $po_rep->getMediaInfo('media', $ps_version);
 		$va_dimensions = array();
 			if (isset($va_tmp['WIDTH']) && isset($va_tmp['HEIGHT'])) {
-			if (($vn_w = $va_tmp['WIDTH']) && ($vn_h = $va_tmp['WIDTH'])) {
+			if (($vn_w = $va_tmp['WIDTH']) && ($vn_h = $va_tmp['HEIGHT'])) {
 				$va_dimensions[] = $va_tmp['WIDTH'].'p x '.$va_tmp['HEIGHT'].'p';
 			}
 		}
@@ -2824,7 +2824,7 @@ $ca_relationship_lookup_parse_cache = array();
 			$vs_display_delimiter = $ca_relationship_lookup_parse_cache[$vs_rel_table][$vs_cache_key]['delimiter'];
 			$vb_use_new_display_format = true;
 		} else {
-			if (($vs_display_format = $o_config->get($vs_rel_table.'_lookup_settings')) && !is_array($vs_display_format)) {				
+			if (($vs_display_format = $o_config->get("{$vs_rel_table}_lookup_settings")) && !is_array($vs_display_format)) {				
 				if ($vs_display_format && is_string($vs_display_format) && !preg_match_all('!\^{1}([A-Za-z0-9\._]+)!', $vs_display_format, $va_matches)) {
 					$vs_display_format = '^'.$vs_rel_table.'.preferred_labels';
 					$va_bundles = array($vs_rel_table.'.preferred_labels');
@@ -2832,10 +2832,10 @@ $ca_relationship_lookup_parse_cache = array();
 					$va_bundles = $va_matches[1];
 				}
 			} else {
-				if (is_array($va_display_format = $o_config->getList($vs_rel_table.'_lookup_settings'))) {
+				if (is_array($va_display_format = $o_config->getList("{$vs_rel_table}_lookup_settings"))) {
 					$vb_use_new_display_format = true;
 				
-					if(!($vs_display_delimiter = $o_config->get($vs_rel_table.'_lookup_delimiter'))) {
+					if(!($vs_display_delimiter = $o_config->get("{$vs_rel_table}_lookup_delimiter"))) {
 						$vs_display_delimiter = ' ';
 					} else {
 						$vs_display_delimiter = " {$vs_display_delimiter} ";
@@ -3002,7 +3002,7 @@ $ca_relationship_lookup_parse_cache = array();
 				}
 
                 if ($vs_template) {
-                    $va_items[$va_relation[$vs_rel_pk]]['_display'] = caProcessTemplateForIDs($vs_template, $vs_rel_table, array($va_relation[$vs_rel_pk]), array('returnAsArray' => false, 'returnAsLink' => true, 'delimiter' => caGetOption('delimiter', $pa_options, $vs_display_delimiter), 'resolveLinksUsing' => $vs_rel_table));
+						$va_items[$va_relation[$vs_rel_pk]]['_display'] = caProcessTemplateForIDs($vs_template, $pt_rel->tableName(), array($va_relation['relation_id']), array('returnAsArray' => false, 'returnAsLink' => true, 'delimiter' => caGetOption('delimiter', $pa_options, $vs_display_delimiter), 'resolveLinksUsing' => $vs_rel_table));
                 } else {
                     $va_items[$va_relation[$vs_rel_pk]]['_display'] = $va_items[$va_relation[$vs_rel_pk]]['label'];
                 }

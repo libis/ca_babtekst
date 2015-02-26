@@ -1242,7 +1242,7 @@ class ca_search_forms extends BundlableLabelableBaseModelWithAttributes {
 				if (sizeof($va_sub_elements = $t_element->getElementsInSet()) > 1) {
 					foreach($va_sub_elements as $vn_element_id => $va_element_info) {
 						if ($va_tmp[1] == $va_element_info['element_code']) { continue; }
-                        $va_elements[] = $va_tmp[0].'.'.$va_tmp[1].'.'.$va_element_info['element_code'];
+                        $va_elements[] = $va_tmp[0].'.'.$va_element_info['element_code'];
 					}
 				}
 			} else {
