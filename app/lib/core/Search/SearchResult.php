@@ -298,6 +298,21 @@ class SearchResult extends BaseObject {
 		if ($t_rel_instance->hasField('deleted')) {
 			$vs_deleted_sql = " AND (".$t_rel_instance->tableName().".deleted = 0)";
 		}
+		
+        //Libis_start
+        //Retrieving ca_lists_items(tags) via rest api returns tags with deleted = 0 and deleted = 1 status in the database.
+        //Reason being the missing 'deleted = 0' check in the below executed sql query ($vs_sql). This fix solves the issue
+        //by: checking if the related tables have 'deleted' field, if found, add 'deleted = 0' in the query.
+        if(is_array($va_linking_tables) && sizeof($va_linking_tables) > 0){
+            foreach($va_linking_tables as $rel_table){
+                $t_related_instance = $this->opo_datamodel->getInstanceByTableName($rel_table, true);
+                if ($t_related_instance->hasField('deleted')) {
+                    $vs_deleted_sql = " AND (".$t_related_instance->tableName().".deleted = 0)";
+                }
+            }
+        }
+        //Libis_end			
+		
 		$vs_sql = "
 			SELECT ".join(',', $va_fields)."
 			FROM ".$this->ops_table_name."
