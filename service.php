@@ -50,6 +50,21 @@
 	//
 	// Send output to client
 	//
+	
+	//libis_start
+	// Remove existing file and write api request results into a new file
+	$queryParameter = $req->getParameter("q",pString);
+	if(isset($queryParameter))
+	{
+		$tempFileName = str_replace("set:", "", $queryParameter);
+		$tempFileName = str_replace("\"", "", $tempFileName);
+		$tempFilePath = __CA_BASE_DIR__."/app/tmp/".$tempFileName.".txt";
+		if(file_exists($tempFilePath))
+			unlink($tempFilePath);
+		file_put_contents($tempFilePath,print_r($resp->getContent(), true));
+	}
+	//libis_end		
+	
 	$resp->sendResponse();
 
 	$req->close();

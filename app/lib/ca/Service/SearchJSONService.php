@@ -51,7 +51,29 @@ class SearchJSONService extends BaseJSONService {
 	public function dispatch(){
 		$va_post = $this->getRequestBodyArray();
 
-
+		//libis_start
+		/*
+			For longer requests collective access takes huge amount of time in preparing results
+			(about an hour for 8000 records with bundle), which exceeds the connection wait time on our server.
+			Consequently, we loose connection after a while (about 10 minutes). At the time when collective access is
+			ready to send response(result) there is no connection with the client. To solve this problem we do the following:
+			1. Once results are ready we store them in app/tmp directory with the 'set code' as name of the file.
+			2. Our client application (LibisIn worker in this case) keeps on waiting and periodically checks if file is ready.
+			   Once file is available, client application downloads it and proceeds with the processing.
+			We need to make sure that we remove existing (if any) file with the same 'set code' name, before we process request.
+			Following code is serving this purpose.
+		*/
+		$queryParameter = $this->ops_query;
+		if(isset($queryParameter))
+		{
+			$tempFileName = str_replace("set:", "", $queryParameter);
+			$tempFileName = str_replace("\"", "", $tempFileName);
+			$tempFilePath = __CA_BASE_DIR__."/app/tmp/".$tempFileName.".txt";   
+			if(file_exists($tempFilePath))
+				unlink($tempFilePath);
+		}
+		//libis_end			
+		
 		switch($this->getRequestMethod()){
 			case "GET":
 			case "POST":
