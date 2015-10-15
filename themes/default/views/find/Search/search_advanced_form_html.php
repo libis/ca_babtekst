@@ -112,8 +112,12 @@
 	}
 	
 	function caAdvancedSearchFormReset() {
+		jQuery('#AdvancedSearchForm textarea').val('');
 		jQuery('#AdvancedSearchForm input[type=text]').val('');
+		jQuery('#AdvancedSearchForm input[type=hidden]').val('');
 		jQuery('#AdvancedSearchForm input[type=checkbox]').attr('checked', 0);
-		jQuery('#AdvancedSearchForm select').attr('selectedIndex', 0);
+		jQuery('#AdvancedSearchForm input[type=autocomplete]').val('');
+		jQuery('#AdvancedSearchForm select').val('');
+		jQuery('#AdvancedSearchForm select').prop('selectedIndex', -1);
 	}
 </script>
