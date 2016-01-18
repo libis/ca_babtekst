@@ -66,7 +66,7 @@ class SearchJSONService extends BaseJSONService {
 		$queryParameter = $this->ops_query;
 		if(isset($queryParameter))
 		{
-			$tempFileName = str_replace("set:", "", $queryParameter);
+			$tempFileName = str_replace("ca_sets.set_code:", "", $queryParameter);
 			$tempFileName = str_replace("\"", "", $tempFileName);
 			$tempFilePath = __CA_BASE_DIR__."/app/tmp/".$tempFileName.".txt";   
 			if(file_exists($tempFilePath))
